@@ -26,7 +26,7 @@ if prompt := st.chat_input("Bir şeyler yazın..."):
     with st.chat_message("assistant"):
         try:
             payload = {
-                "model": "llama-3.3-70b-versatile",
+                "model": "llama3-8b-8192",
                 "messages": [
                     {
                         "role": "system",
@@ -36,14 +36,13 @@ if prompt := st.chat_input("Bir şeyler yazın..."):
                 "temperature": 0.3
             }
             
-            # User-Agent başlığı ekleyerek 403 Forbidden engelini aşıyoruz
             req = urllib.request.Request(
                 "https://api.groq.com/openai/v1/chat/completions",
                 data=json.dumps(payload).encode("utf-8"),
                 headers={
                     "Authorization": f"Bearer {GROQ_API_KEY}",
                     "Content-Type": "application/json",
-                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+                    "User-Agent": "Mozilla/5.0"
                 }
             )
             
